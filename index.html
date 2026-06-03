@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neo Linux</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue-100: #B5D4F4;
+    --blue-200: #85B7EB;
+    --blue-400: #378ADD;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --blue-900: #042C53;
+    --text: #0f1117;
+    --text-muted: #4a5568;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --border: rgba(24, 95, 165, 0.15);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(248,250,252,0.85);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, var(--blue-400), var(--blue-800));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--blue-600); }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--blue-400), var(--blue-800));
+    color: white !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    font-weight: 500 !important;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .nav-cta:hover { opacity: 0.9; color: white !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 3rem;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(55,138,221,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(55,138,221,0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    right: -100px;
+    top: -100px;
+    background: radial-gradient(circle, rgba(55,138,221,0.12) 0%, rgba(12,68,124,0.06) 50%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-glow-2 {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    left: -50px;
+    bottom: -50px;
+    background: radial-gradient(circle, rgba(21,148,243,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(55,138,221,0.1);
+    border: 1px solid rgba(55,138,221,0.25);
+    border-radius: 100px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--blue-600);
+    margin-bottom: 1.75rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--blue-400);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: 1.5rem;
+    color: var(--blue-900);
+  }
+
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--blue-400) 0%, var(--blue-800) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    max-width: 540px;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--blue-400), var(--blue-800));
+    color: white;
+    text-decoration: none;
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(55,138,221,0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(55,138,221,0.4);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--blue-700, #185FA5);
+    text-decoration: none;
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border: 1.5px solid var(--border);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--blue-400);
+    background: rgba(55,138,221,0.05);
+  }
+
+  .hero-terminal {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    width: 380px;
+  }
+
+  .terminal {
+    background: var(--blue-900);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(55,138,221,0.2);
+    box-shadow: 0 24px 64px rgba(4,44,83,0.25), 0 0 0 1px rgba(55,138,221,0.1);
+  }
+
+  .terminal-bar {
+    background: rgba(255,255,255,0.05);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .t-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .t-dot.r { background: #ff5f57; }
+  .t-dot.y { background: #febc2e; }
+  .t-dot.g { background: #28c840; }
+
+  .terminal-title {
+    flex: 1;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .terminal-body {
+    padding: 1.25rem 1.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .t-prompt { color: var(--blue-200); }
+  .t-cmd { color: #e2e8f0; }
+  .t-output { color: rgba(255,255,255,0.45); padding-left: 0.5rem; }
+  .t-success { color: #68d391; }
+  .t-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--blue-400);
+    vertical-align: -2px;
+    animation: blink 1.2s step-end infinite;
+  }
+
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  /* STATS */
+  .stats {
+    display: flex;
+    gap: 3rem;
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .stat { text-align: center; flex: 1; }
+  .stat-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.75rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--blue-400), var(--blue-800));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; font-weight: 400; }
+
+  /* FEATURES */
+  .section {
+    padding: 5rem 3rem;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--blue-600);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: var(--blue-900);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    font-weight: 300;
+    max-width: 500px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--blue-400), var(--blue-800));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .feature-card:hover { border-color: rgba(55,138,221,0.3); transform: translateY(-2px); }
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, rgba(55,138,221,0.12), rgba(24,95,165,0.08));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: var(--blue-600);
+  }
+
+  .feature-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: var(--blue-900);
+  }
+
+  .feature-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* DISTRO EDITIONS */
+  .editions {
+    background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 100%);
+    padding: 5rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .editions::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(181,212,244,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(181,212,244,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .editions .section-label { color: var(--blue-200); position: relative; z-index: 1; }
+  .editions .section-title { color: white; position: relative; z-index: 1; }
+  .editions .section-sub { color: rgba(255,255,255,0.55); position: relative; z-index: 1; }
+
+  .editions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .edition-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(181,212,244,0.15);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.25s;
+  }
+
+  .edition-card:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(181,212,244,0.3);
+  }
+
+  .edition-card.featured {
+    border-color: rgba(55,138,221,0.5);
+    background: rgba(55,138,221,0.1);
+  }
+
+  .edition-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+
+  .tag-gaming { background: rgba(55,138,221,0.25); color: var(--blue-100); }
+  .tag-dev { background: rgba(133,183,235,0.2); color: #B5D4F4; }
+
+  .edition-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+
+  .edition-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .edition-specs {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .edition-specs li {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .edition-specs li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--blue-400);
+    flex-shrink: 0;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 6rem 3rem;
+    text-align: center;
+    background: var(--surface);
+  }
+
+  .cta-section .section-title { margin: 0 auto 0.75rem; }
+  .cta-section .section-sub { margin: 0 auto 2.5rem; }
+
+  .cta-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--blue-900);
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer .logo { font-size: 1rem; }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.25);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Neo Linux</div>
+  <ul class="nav-links">
+    <li><a href="#">Features</a></li>
+    <li><a href="#">Editions</a></li>
+    <li><a href="#">Docs</a></li>
+    <li><a href="#">Community</a></li>
+  </ul>
+  <a href="downloads.html" class="nav-cta">Download →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      Version 1.0 — Now Available
+    </div>
+    <h1><span>Neo.</span></h1>
+    <p>A minimal, high-performance Linux distribution engineered for gamers and developers. Zero bloat. Maximum control.</p>
+    <div class="hero-actions">
+      <a href="downloads.html" class="btn-primary">
+        ↓ Download Now
+      </a>
+      <a href="#features" class="btn-secondary">
+        Explore Features →
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-terminal">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="t-dot r"></div>
+        <div class="t-dot y"></div>
+        <div class="t-dot g"></div>
+        <div class="terminal-title">neo@linux: ~</div>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-prompt">neo@linux</span><span class="t-cmd"> ~ $ neofetch</span></div>
+        <div class="t-output">OS: Neo Linux 45 x86_64</div>
+        <div class="t-output">Kernel: 7.0.10</div>
+        <div class="t-output">Shell: #/bin/bash</div>
+        <div class="t-output">DE: KDE Plasma</div>
+        <div class="t-output">CPU: AMD Ryzen 9 7950X</div>
+        <div class="t-output">GPU: NVIDIA RTX 4090</div>
+        <div class="t-output">RAM: 2184MiB / 32768MiB</div>
+        <br>
+        <div><span class="t-prompt">neo@linux</span><span class="t-cmd"> ~ $ </span><span class="t-cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">7.0.10</div>
+    <div class="stat-label">Latest-Kernel</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">&lt;10s</div>
+    <div class="stat-label">Boot time (NVMe)</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Free & open source</div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-label">Why Neo Linux</div>
+  <div class="section-title">Built different.</div>
+  <div class="section-sub">Every default is a decision. Neo Linux ships with exactly what you need and nothing you don't.</div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🛠</div>
+      <div class="feature-title">Dev Tools Built In</div>
+      <div class="feature-desc">Git, Docker, and your choice of shell ready on first boot. No hunting for packages.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🧹</div>
+      <div class="feature-title">Zero Bloat</div>
+      <div class="feature-desc">No telemetry. No snaps. No background daemons you didn't ask for. Your RAM is yours.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-title">Rolling Releases</div>
+      <div class="feature-desc">Generally on the latest stable packages. No big-bang upgrades, just a smooth rolling channel.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDITIONS -->
+<section class="editions">
+  <div class="section-label">ISO.</div>
+  <div class="section-title">Download.</div>
+  <div class="section-sub">Free forever.</div>
+
+  <div class="editions-grid">
+    <div class="edition-card featured">
+      <div class="edition-name">Neo Linux</div>
+      <div class="edition-desc">Optimized for performance in games. Ships all the good stuff.</div>
+      <ul class="edition-specs">
+        <li>Most drivers pre-installed</li>
+        <li>GameMode & Feral scheduler</li>
+        <li>Steam game Launcher</li>
+        <li>PipeWire with low-latency audio</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-label" style="text-align:center">Get started</div>
+  <div class="section-title">Ready to switch?</div>
+  <div class="section-sub">Download takes under a minute. Installation takes under ten.</div>
+  <div class="cta-actions">
+    <a href="downloads.html" class="btn-primary">↓ Download Neo Linux</a>
+    <a href="#" class="btn-secondary">Read the Docs</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Neo Linux</div>
+  <ul class="footer-links">
+    <li><a href="#">GitHub</a></li>
+    <li><a href="#">Docs</a></li>
+    <li><a href="#">Discord</a></li>
+    <li><a href="#">License</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Neo Linux Project. Open source.</div>
+</footer>
+
+</body>
+</html>
