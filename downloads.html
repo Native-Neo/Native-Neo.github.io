@@ -566,21 +566,34 @@
 
 <script>
 const editions = {
-  gaming: {
-    checksum: 'a3f8b2c91d7e4f056a1234bcde5678f90ab1c234d5e6f7089abcd012efab3456',
+  Full: {
+    checksum: 'N/A',
     cards: [
       {
         icon: '💾',
         arch: 'x86_64',
-        desc: 'For most desktop & laptop PCs with Intel or AMD processors.',
-        size: '3 GB',
+        desc: 'For most desktop & laptop PCs with Intel or AMD processors.(Codenamed Hyper-Nova edition)',
+        size: '3.9 GB',
         type: 'ISO image',
         recommended: true
       },
     ]
   },
 };
-
+  Gaming: {
+    checksum: 'N/A',
+    cards: [
+      {
+        icon: '💾',
+        arch: 'x86_64',
+        desc: 'For most desktop & laptop PCs with Intel or AMD processors.(Codenamed Game-Nova edition)',
+        size: '3.9 GB',
+        type: 'ISO image',
+        recommended: true
+      },
+    ]
+  },
+};
 function renderCards(editionKey) {
   const { cards, checksum } = editions[editionKey];
   const container = document.getElementById('download-cards');
