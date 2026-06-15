@@ -160,8 +160,8 @@
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-content">
-        <div class="step-title">Download the ISO</div>
-        <div class="step-desc">Grab the ISO for your edition. Verify the SHA256 checksum before proceeding.</div>
+        <div class="step-title">Download the ISO(Do NOT use the "Install to system" file on the desktop it is for dependency purposes and will soon be removed use the System Installer file on the desktop for installation)</div>
+        <div class="step-desc">Grab the ISO for your edition. Verify the SHA256 checksum before proceeding(when provided).</div>
       </div>
     </div>
     <div class="step">
@@ -169,7 +169,7 @@
       <div class="step-content">
         <div class="step-title">Flash to USB</div>
         <div class="step-desc">Use <span class="code-inline">dd</span>, Balena Etcher, or Ventoy (recommended). Minimum 8 GB USB.<br>
-        <span class="code-inline">dd if=Neo-44.iso of=/dev/sdX bs=4M status=progress</span></div>
+        <span class="code-inline">dd if=isofilename.iso of=/dev/sdX bs=4M status=progress</span></div>
       </div>
     </div>
     <div class="step">
