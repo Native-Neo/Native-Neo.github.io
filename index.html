@@ -410,15 +410,16 @@
     font-weight: 300;
   }
 
-  /* DISTRO EDITIONS */
-  .editions {
+  /* CTA */
+  .cta-section {
+    padding: 6rem 3rem;
+    text-align: center;
     background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 100%);
-    padding: 5rem 3rem;
     position: relative;
     overflow: hidden;
   }
 
-  .editions::before {
+  .cta-section::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -428,105 +429,17 @@
     background-size: 48px 48px;
   }
 
-  .editions .section-label { color: var(--blue-200); position: relative; z-index: 1; }
-  .editions .section-title { color: white; position: relative; z-index: 1; }
-  .editions .section-sub { color: rgba(255,255,255,0.55); position: relative; z-index: 1; }
-
-  .editions-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .edition-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(181,212,244,0.15);
-    border-radius: 12px;
-    padding: 2rem;
-    transition: all 0.25s;
-  }
-
-  .edition-card:hover {
-    background: rgba(255,255,255,0.08);
-    border-color: rgba(181,212,244,0.3);
-  }
-
-  .edition-card.featured {
-    border-color: rgba(55,138,221,0.5);
-    background: rgba(55,138,221,0.1);
-  }
-
-  .edition-tag {
-    display: inline-block;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 0.3rem 0.75rem;
-    border-radius: 100px;
-    margin-bottom: 1rem;
-  }
-
-  .tag-gaming { background: rgba(55,138,221,0.25); color: var(--blue-100); }
-  .tag-dev { background: rgba(133,183,235,0.2); color: #B5D4F4; }
-
-  .edition-name {
-    font-family: 'Space Mono', monospace;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 0.5rem;
-  }
-
-  .edition-desc {
-    font-size: 0.85rem;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    font-weight: 300;
-  }
-
-  .edition-specs {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .edition-specs li {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.6);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .edition-specs li::before {
-    content: '';
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--blue-400);
-    flex-shrink: 0;
-  }
-
-  /* CTA */
-  .cta-section {
-    padding: 6rem 3rem;
-    text-align: center;
-    background: var(--surface);
-  }
-
-  .cta-section .section-title { margin: 0 auto 0.75rem; }
-  .cta-section .section-sub { margin: 0 auto 2.5rem; }
+  .cta-section .section-label { color: var(--blue-200); position: relative; z-index: 1; text-align: center; }
+  .cta-section .section-title { color: white; margin: 0 auto 0.75rem; position: relative; z-index: 1; }
+  .cta-section .section-sub { color: rgba(255,255,255,0.55); margin: 0 auto 2.5rem; position: relative; z-index: 1; }
 
   .cta-actions {
     display: flex;
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
   }
 
   /* FOOTER */
@@ -561,6 +474,28 @@
     font-size: 0.75rem;
     color: rgba(255,255,255,0.25);
   }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-terminal { display: none; }
+    .features-grid { grid-template-columns: 1fr; }
+    .stats { flex-wrap: wrap; gap: 1.5rem; }
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    .hero { padding: 4rem 1.25rem; min-height: auto; }
+    .hero h1 { font-size: 2.5rem; }
+    .hero p { font-size: 1rem; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions a { justify-content: center; }
+    .stats { padding: 1.5rem 1.25rem; flex-direction: column; gap: 1.25rem; }
+    .section, .cta-section { padding: 3rem 1.25rem; }
+    .section-title { font-size: 1.5rem; }
+    footer { padding: 2rem 1.25rem; flex-direction: column; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
 </style>
 </head>
 <body>
@@ -569,9 +504,9 @@
 <nav>
   <div class="logo">Neo Linux</div>
   <ul class="nav-links">
-    <li><a href="#">Features</a></li>
+    <li><a href="#features">Features</a></li>
   </ul>
-  <a href="downloads.html" class="nav-cta">Download →</a>
+  <a href="download" class="nav-cta">Download →</a>
 </nav>
 
 <!-- HERO -->
@@ -590,8 +525,8 @@
     <h1><span>Neo.</span></h1>
     <p>A minimal, high-performance Linux distribution engineered for gamers and developers. Zero bloat. Maximum control.</p>
     <div class="hero-actions">
-      <a href="downloads.html" class="btn-primary">
-        ↓ Download Now
+      <a href="download" class="btn-primary">
+        ↓ Get Neo Linux
       </a>
       <a href="#features" class="btn-secondary">
         Explore Features →
@@ -627,7 +562,7 @@
 <div class="stats">
   <div class="stat">
     <div class="stat-num">7.0.10</div>
-    <div class="stat-label">Latest-Kernel</div>
+    <div class="stat-label">Latest kernel</div>
   </div>
   <div class="stat">
     <div class="stat-num">&lt;10s</div>
@@ -663,33 +598,13 @@
   </div>
 </section>
 
-<!-- EDITIONS -->
-<section class="editions">
-  <div class="section-label">ISO.</div>
-  <div class="section-title">Download.</div>
-  <div class="section-sub">Free forever.</div>
-
-  <div class="editions-grid">
-    <div class="edition-card featured">
-      <div class="edition-name">Neo Linux</div>
-      <div class="edition-desc">Optimized for performance in games. Ships all the good stuff.</div>
-      <ul class="edition-specs">
-        <li>Most drivers pre-installed</li>
-        <li>GameMode & Feral scheduler</li>
-        <li>Steam game Launcher</li>
-        <li>PipeWire with low-latency audio</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
 <!-- CTA -->
 <section class="cta-section">
-  <div class="section-label" style="text-align:center">Get started</div>
+  <div class="section-label">Get started</div>
   <div class="section-title">Ready to switch?</div>
-  <div class="section-sub">Download takes under a minute. Installation takes under ten.</div>
+  <div class="section-sub">Neo Linux is built from source. Grab the repo and build it yourself.</div>
   <div class="cta-actions">
-    <a href="downloads.html" class="btn-primary">↓ Download Neo Linux</a>
+    <a href="download" class="btn-primary">↓ Get Neo Linux</a>
   </div>
 </section>
 
